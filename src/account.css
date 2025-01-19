@@ -1,0 +1,140 @@
+.info {
+    padding-left: 30px;
+    padding-top: 2px;
+    margin: 0;
+    font-weight: 400;
+}
+
+.username {
+    font-weight: bold;
+    padding-left: 18px;
+    padding-bottom: 2px;
+    padding-top: 8px;
+    margin: 0;
+}
+
+
+.whole-account{
+    display: flex;
+    font-weight: 200;
+    font-family: "Atkinson Hyperlegible", sans-serif;
+}
+
+.sidebar {
+    background-color: darkgrey;
+    height: 100vw;
+    width: 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user {
+    padding: 15px;
+}
+.plus{
+    padding:7px;
+}
+
+.userinfo {
+    padding-top: 30px;
+    padding-left: 60px;
+}
+
+.bio {
+    display: flex;
+}
+
+
+.tags-acc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-left: 30px;
+    padding-top: 7px;
+}
+
+.ldtag {
+    background-color: cyan;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 8px;
+    min-width: 40px;
+}
+
+.pftag {
+    background-color: rgb(176, 22, 176);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 8px;
+    min-width: 40px;
+}
+
+.afftag {
+    background-color: rgb(11, 245, 7);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 8px;
+    min-width: 40px;
+}
+
+.afftag {
+    background-color: rgb(11, 245, 7);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 8px;
+    min-width: 40px;
+}
+
+.archivedtag {
+    background-color: rgb(245, 170, 7);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 8px;
+    min-width: 40px;
+}
+
+.long-bio {
+    font-weight: 400;
+}
+
+.recent {
+    font-weight: bold;
+    padding-bottom: 4px;
+    margin: 0;
+}
+
+.profile {
+    padding-left: 75px;
+}
+
+.post-preview {
+    display: flex;
+    padding-top: 3px;
+    padding-left: 10px;
+    margin: 0;
+    align-items: start;
+    padding-bottom: 15px;
+}
+
+.post-side {
+    background-color: darkgrey;
+    width: 3px;
+    height: 55px;
+    margin-right: 6px;
+}
+
+.post-info {
+    margin: 0;
+    padding: 0;
+}
+
+.post-info > h4 {
+    margin-top: 2px;
+    margin-bottom: 4px;
+}
