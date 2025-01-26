@@ -3,7 +3,7 @@
 export default function Post(props){
 
     const arr = props.tags.map(function(tag, idx){
-        return <span className={tag.class} key={idx+tag.name}>{tag.name}</span>
+        return <span key={idx+tag}>{tag}</span>
     })
 
     return(

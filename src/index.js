@@ -10,4 +10,4 @@ import PostAdd from "./PostAdd";
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
-root.render(<React.StrictMode><PostAdd /></React.StrictMode>);
+root.render(<React.StrictMode><Home /></React.StrictMode>);
