@@ -18,6 +18,7 @@ export default function Post(props){
         <div class="tags">
             {arr}
         </div>
+        <button onClick={() => props.deletePost(props.id)}>Delete</button>
     </div>
     
     );

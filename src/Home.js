@@ -28,6 +28,8 @@ export default function Home(){
         content={post.content}
         author={post.author}
         tags={post.tags}
+        deletePost={deletePost}
+        // id={post.id}
 
         />)
     })
@@ -43,12 +45,22 @@ export default function Home(){
         });
     }
 
+    function deletePost(id){
+        setPosts((prev) => {
+            return prev.filter((post) => {
+                console.log("Post id: ", post.id)
+                console.log("Passed Id: ", id)
+                return post.id !== id;
+            })
+        })
+    }
+
     return(
         <div class="whole">
         
         <Sidebar />
         <div class="newdiv">
-        <PostAdd addPost={addPost}/>
+        <PostAdd addPost={addPost} length={currPosts[currPosts.length-1].id}/>
         <select value={currTag} onChange={updateCurrTag}>
             <option value="All">All</option>
             <option value="LD">LD</option>

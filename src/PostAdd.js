@@ -1,6 +1,10 @@
 import React, {useState} from "react";
+import postData from "./posts.json";
+
+const possibleTags = ["LD", "PF", "Aff","Neg"];
 
 export default function PostAdd(props){
+
     const [formValues, setFormValues] = useState({
         title: "",
         content: "",
@@ -12,6 +16,11 @@ export default function PostAdd(props){
         name:"",
         age:0,
         pfp:""
+    })
+
+    const tagsList = possibleTags.map((tag) => {
+        return (<div><input type="checkbox" id={tag} name={tag} value={tag} onChange={handleChange} checked={formValues.tags.includes(tag)}/>
+            <label htmlFor={tag}>{tag}</label><br/></div>)
     })
 
     const handleAuthorChange = (e) => {
@@ -66,6 +75,7 @@ export default function PostAdd(props){
             content:formValues["content"],
             author:authorValues,
             tags:formValues["tags"]
+            // id:props.length+1
         };
         props.addPost(newData);
         setFormValues({
