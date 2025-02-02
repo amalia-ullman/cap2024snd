@@ -18,11 +18,6 @@ export default function PostAdd(props){
         pfp:""
     })
 
-    const tagsList = possibleTags.map((tag) => {
-        return (<div><input type="checkbox" id={tag} name={tag} value={tag} onChange={handleChange} checked={formValues.tags.includes(tag)}/>
-            <label htmlFor={tag}>{tag}</label><br/></div>)
-    })
-
     const handleAuthorChange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
@@ -68,6 +63,12 @@ export default function PostAdd(props){
        // console.log(formValues);
     };
 
+    const tagsList = possibleTags.map((tag, idx) => {
+        return (<div key={tag + idx}><input type="checkbox" id={tag} name={tag} value={tag} onChange={handleChange} checked={formValues.tags.includes(tag)}/>
+            <label htmlFor={tag}>{tag}</label><br/></div>)
+    })
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const newData = {
@@ -97,7 +98,7 @@ export default function PostAdd(props){
         <div>
             <form onSubmit={handleSubmit}>
                 <input name="title" placeholder="Title" value={formValues.title} onChange={handleChange}/><br/>
-                <label>Tags:</label><br/>
+                {/* <label>Tags:</label><br/>
                 <input type="checkbox" id="LD" name="LD" value="LD" onChange={handleChange}/>
                 <label htmlFor="LD">LD</label><br/>
                 <input type="checkbox" id="PF" name="PF" value="PF" onChange={handleChange}/>
@@ -105,7 +106,8 @@ export default function PostAdd(props){
                 <input type="checkbox" id="Aff" name="Aff" value="Aff" onChange={handleChange}/>
                 <label htmlFor="Aff">Aff</label><br/>
                 <input type="checkbox" id="Neg" name="Neg" value="Neg" onChange={handleChange}/>
-                <label htmlFor="Neg">Neg</label><br/>
+                <label htmlFor="Neg">Neg</label><br/> */}
+                {tagsList}
                 <input name="content" placeholder="Details" value={formValues.content} onChange={handleChange}/><br/>
                 <input name="name" placeholder="Username" value={authorValues.name} onChange={handleAuthorChange}/><br/>
                 <input name="age" placeholder="Age" value={authorValues.age} onChange={handleAuthorChange}/><br/>
