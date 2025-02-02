@@ -21,6 +21,17 @@ export default function Home(){
 
     console.log(filteredPosts);
 
+    function editPost(id, newPost) {
+        setPosts((prev) => {
+            return prev.map(function(post){
+                if(post.id == id){
+                    return newPost;
+                }
+                return post;
+            })
+        })
+    }
+
     let posts = filteredPosts.map(function(post, idx){
         return (<Post 
         key={idx + post.title}
@@ -29,10 +40,13 @@ export default function Home(){
         author={post.author}
         tags={post.tags}
         deletePost={deletePost}
-        // id={post.id}
+        id={post.id}
+        editPost={editPost}
 
         />)
     })
+
+    
 
 
     function updateCurrTag(e) {
@@ -55,12 +69,13 @@ export default function Home(){
         })
     }
 
+
     return(
         <div class="whole">
         
         <Sidebar />
         <div class="newdiv">
-        <PostAdd addPost={addPost} length={currPosts[currPosts.length-1].id}/>
+        <PostAdd addPost={addPost} length={currPosts[0].id}/>
         <select value={currTag} onChange={updateCurrTag}>
             <option value="All">All</option>
             <option value="LD">LD</option>

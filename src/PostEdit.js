@@ -4,19 +4,18 @@ import "./Form.css";
 
 const possibleTags = ["LD", "PF", "Aff","Neg"];
 
-export default function PostAdd(props){
+export default function PostEdit(props){
 
     const [formValues, setFormValues] = useState({
-        title: "",
-        content: "",
-        tags: [
-        ]
+        title: props.title,
+        content: props.content,
+        tags: props.tags
     });
 
     const [authorValues, setAuthorValues] = useState({
-        name:"",
-        age:0,
-        pfp:""
+        name:props.author.name,
+        age:props.author.age,
+        pfp:props.author.pfp
     })
 
     const [openModal, setModal] = useState(false);
@@ -84,27 +83,16 @@ export default function PostAdd(props){
             content:formValues["content"],
             author:authorValues,
             tags:formValues["tags"],
-            id:props.length+1
+            id:props.id
         };
-        props.addPost(newData);
-        setFormValues({
-            title: "",
-            content: "",
-            tags: [
-            ]
-        });
-        setAuthorValues({
-            name:"",
-            age:0,
-            pfp:""
-        });
+        props.editPost(props.id, newData);
 
     }
 
 
     return(
         //openModal ? "openModal" : ""
-        <div><button onClick={toggleModal}>New Post</button><div className={openModal && "openModal requires-no-scroll"} > {openModal ?  
+        <div><button onClick={toggleModal}>Edit Post</button><div className={openModal && "openModal requires-no-scroll"} > {openModal ?  
             <form onSubmit={handleSubmit} className="form">
                 <button onClick={toggleModal} className="closeButton">Close</button>
                 <input name="title" placeholder="Title" value={formValues.title} onChange={handleChange}/><br/>
