@@ -1,21 +1,24 @@
 import "./App.css";
+import "./Home.css";
 import React, {Component} from "react";
-import { Route, Navigate, Routes, Router } from "react-router-dom";
+import { Route, Routes} from "react-router";
 import Account from "./Account";
 import Home from "./Home";
+import Test from "./Test";
+import Sidebar from "./Sidebar";
 
 
 export default function App(){
-  return(<h1>jkl;</h1>);
+  return(
+  <div class="whole"> 
+    <Sidebar />
+    <div className="newdiv">
+    <Routes>
+      <Route path="/" element={<Home />}/>
+      <Route path="/test" element={<Test />} />
+    </Routes>
+    </div>
+  </div>
+  );
 }
 
-{/* <Router>
-      <nav>
-        <link to="/account">Account</link>
-        <link to="">Home</link>
-      </nav>
-      <Routes>
-        <Route path="/account" component={<Account />} />
-        <Route path="/" component={<Home />} />
-      </Routes>
-      </Router> */}

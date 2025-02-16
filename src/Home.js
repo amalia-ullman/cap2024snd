@@ -71,10 +71,7 @@ export default function Home(){
 
 
     return(
-        <div class="whole">
-        
-        <Sidebar />
-        <div class="newdiv">
+        <div>
         <PostForm editMode={false} submit={addPost} length={currPosts[0].id}/>
         <select value={currTag} onChange={updateCurrTag}>
             <option value="All">All</option>
@@ -89,6 +86,6 @@ export default function Home(){
                 {/* </div> */}
             </div>
             </div>
-        </div>
+
     );
 }
