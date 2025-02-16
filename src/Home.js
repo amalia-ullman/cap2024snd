@@ -2,7 +2,7 @@ import React from "react";
 import "./Home.css";
 import Sidebar from "./Sidebar";
 import Post from "./Post";
-import PostAdd from "./PostAdd";
+import PostForm from "./PostForm";
 import postData from "./posts.json";
 import {useState} from "react";
 
@@ -75,7 +75,7 @@ export default function Home(){
         
         <Sidebar />
         <div class="newdiv">
-        <PostAdd addPost={addPost} length={currPosts[0].id}/>
+        <PostForm editMode={false} submit={addPost} length={currPosts[0].id}/>
         <select value={currTag} onChange={updateCurrTag}>
             <option value="All">All</option>
             <option value="LD">LD</option>

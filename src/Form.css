@@ -21,7 +21,21 @@
 }
 
 .closeButton{
-    display: block;
+    display: inline;
+    background-color: white;
+    color: black;
+}
+
+.deleteButton{
+    display: inline;
     background-color: red;
     color: white;
 }
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import PostEdit from "./PostEdit";
+import PostForm from "./PostForm";
+import "./Form.css";
 
 export default function Post(props){
 
@@ -10,6 +11,17 @@ export default function Post(props){
 
     const toggleEdit = () => {
         setEdit(!edit);
+    }
+
+    const [openModal, setModal] = useState(false);
+
+    const toggleModal = () => {
+        setModal(!openModal);
+    }
+
+   const deletePost = () => {
+        toggleModal();
+        props.deletePost(props.id);
     }
 
     return(
@@ -24,16 +36,28 @@ export default function Post(props){
         <div class="tags">
             {arr}
         </div>
-        <PostEdit 
+        <PostForm 
             key={props.key}
-            title={props.title}
-            content={props.content}
-            author={props.author}
-            tags={props.tags}
-            id={props.id}
-            editPost = {props.editPost}
+            editMode={true}
+            post = {{
+                title:props.title,
+                content:props.content,
+                author:props.author,
+                tags:props.tags,
+                id:props.id
+            }}
+            submit = {props.editPost}
         />
-        <button onClick={() => props.deletePost(props.id)}>Delete</button>
+        <div><button onClick={toggleModal}>Delete</button><div className={"openModal requires-no-scroll" && openModal} > {openModal ?  
+            <div className="form"><h1>Are you sure?</h1>
+            <div className="buttons">
+                <button onClick={deletePost} className="deleteButton" >Yes, I'm sure</button>
+                <button onClick={toggleModal} className="closeButton">Close</button>
+            </div>
+            </div>
+            : null}
+            </div>
+    </div>
     </div>
     
     );
