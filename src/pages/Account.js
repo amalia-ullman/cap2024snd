@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import './account.css';
-import Sidebar from "./Sidebar";
+import '../css/account.css';
+import Sidebar from "../components/Sidebar";
 
-class Account extends React.Component {
-    render() {
+export default function Account(){
+ 
         return (
             <div class="whole-account">
                 
@@ -67,9 +67,9 @@ class Account extends React.Component {
         );
     };
 
-}
 
-export default Account;
+
+
 
 
 // export default function Account(){

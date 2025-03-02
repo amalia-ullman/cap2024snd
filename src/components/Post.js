@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import PostForm from "./PostForm";
-import "./Form.css";
+import "../css/Form.css";
+import { useNavigate } from "react-router";
 
 export default function Post(props){
+
+    const navigate = useNavigate();
 
     const arr = props.tags.map(function(tag, idx){
         return <span key={idx+tag}>{tag}</span>
@@ -26,6 +29,7 @@ export default function Post(props){
 
     return(
         <div class="post">
+            <button onClick={() => navigate(`/posts/${props.id}`)}>View Post</button>
         <div class="postheader">
             <div class="pfp">
                 <img src={props.author.pfp} />

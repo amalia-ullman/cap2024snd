@@ -1,22 +1,21 @@
 import React, {useState} from "react";
-import postData from "./posts.json";
-import "./Form.css";
+import "../css/Form.css";
 
 const possibleTags = ["LD", "PF", "Aff","Neg"];
 
-export default function PostAdd(props){
+export default function PostForm({editMode, post, submit, length}){
+
 
     const [formValues, setFormValues] = useState({
-        title: "",
-        content: "",
-        tags: [
-        ]
+        title: editMode ? post.title :  "",
+        content: editMode ? post.content : "",
+        tags: editMode ? post.tags : []
     });
 
     const [authorValues, setAuthorValues] = useState({
-        name:"",
-        age:0,
-        pfp:""
+        name: editMode ? post.author.name : "",
+        age: editMode ? post.author.age : 0,
+        pfp: editMode ? post.author.pfp : ""
     })
 
     const [openModal, setModal] = useState(false);
@@ -84,9 +83,9 @@ export default function PostAdd(props){
             content:formValues["content"],
             author:authorValues,
             tags:formValues["tags"],
-            id:props.length+1
+            id: editMode ? post.id : length + 1
         };
-        props.addPost(newData);
+        editMode ? submit(post.id, newData) : submit(newData);
         setFormValues({
             title: "",
             content: "",
@@ -104,7 +103,7 @@ export default function PostAdd(props){
 
     return(
         //openModal ? "openModal" : ""
-        <div><button onClick={toggleModal}>New Post</button><div className={openModal && "openModal requires-no-scroll"} > {openModal ?  
+        <div><button onClick={toggleModal}>{editMode ? "Edit Post" : <i class="fa-solid fa-plus fa-2x"></i>}</button><div className={openModal && "openModal requires-no-scroll"} > {openModal ?  
             <form onSubmit={handleSubmit} className="form">
                 <button onClick={toggleModal} className="closeButton">Close</button>
                 <input name="title" placeholder="Title" value={formValues.title} onChange={handleChange}/><br/>

@@ -1,15 +1,13 @@
 import React from "react";
-import "./Home.css";
-import Sidebar from "./Sidebar";
-import Post from "./Post";
-import PostForm from "./PostForm";
-import postData from "./posts.json";
+import "../css/Home.css";
+import Sidebar from "../components/Sidebar";
+import Post from "../components/Post";
+import PostForm from "../components/PostForm";
 import {useState} from "react";
 
 
-export default function Home(){
+export default function Home({currPosts, editPost, addPost, deletePost}){
     const [currTag, setTag] = useState("All");
-    const [currPosts, setPosts] = useState(postData);
 
 
 
@@ -19,18 +17,6 @@ export default function Home(){
         })
     })
 
-    console.log(filteredPosts);
-
-    function editPost(id, newPost) {
-        setPosts((prev) => {
-            return prev.map(function(post){
-                if(post.id == id){
-                    return newPost;
-                }
-                return post;
-            })
-        })
-    }
 
     let posts = filteredPosts.map(function(post, idx){
         return (<Post 
@@ -45,7 +31,6 @@ export default function Home(){
 
         />)
     })
-
     
 
 
@@ -53,26 +38,10 @@ export default function Home(){
         setTag(e.target.value);
     }
 
-    function addPost(newPost){
-        setPosts((prev) => {
-            return([newPost, ...prev])
-        });
-    }
-
-    function deletePost(id){
-        setPosts((prev) => {
-            return prev.filter((post) => {
-                console.log("Post id: ", post.id)
-                console.log("Passed Id: ", id)
-                return post.id !== id;
-            })
-        })
-    }
 
 
     return(
         <div>
-        <PostForm editMode={false} submit={addPost} length={currPosts[0].id}/>
         <select value={currTag} onChange={updateCurrTag}>
             <option value="All">All</option>
             <option value="LD">LD</option>
