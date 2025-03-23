@@ -1,0 +1,12 @@
+.sidebar {
+    background-color: darkgrey;
+    height: 100vw;
+    width: 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a:link > i{
+    color: black !important;
+}
