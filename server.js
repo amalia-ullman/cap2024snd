@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { Post } from "/models/postsModel";
 
 dotenv.config();
 
@@ -14,21 +15,23 @@ mongoose
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  console.log("get request made");
-  res.send("hello");
-});
-
-app.get("/:id", (req, res) => {
-  console.log("req.params: ", req.params);
-
+app.get("/api/posts", (req, res) => {
   res.sendStatus(200);
 });
 
-app.post("/new", (req, res) => {
-  const data = req.body;
-  console.log("data captured from request: ", data);
-  console.log(req.body);
+app.get("/api/posts/:id", (req, res) => {
+  res.sendStatus(200);
+});
+
+app.get("api/posts", (req, res) => {
+  res.sendStatus(200);
+});
+
+app.put("/api/posts/:id", (req, res) => {
+  res.sendStatus(200);
+});
+
+app.delete("api/posts/:id", (req, res) => {
   res.sendStatus(200);
 });
 
