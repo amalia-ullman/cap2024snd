@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { Post } from "./models/postsModel.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -12,6 +13,8 @@ mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("Connected to db!"))
   .catch((err) => console.log("could not connect", err));
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -46,6 +49,17 @@ app.get("/api/posts/:id", async (req, res) => {
 app.delete("/api/posts/:id", async (req, res) => {
   try {
     const result = await Post.findByIdAndDelete(req.params.id);
+    res.send(result).status(200);
+  } catch (err) {
+    res.send(err).status(500);
+  }
+});
+
+app.put("/api/posts/:id", async (req, res) => {
+  try {
+    const result = await Post.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     res.send(result).status(200);
   } catch (err) {
     res.send(err).status(500);
