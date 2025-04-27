@@ -24,7 +24,7 @@ export default function Home({ currPosts, editPost, addPost, deletePost }) {
         author={post.author}
         tags={post.tags}
         deletePost={deletePost}
-        id={post.id}
+        _id={post._id}
         editPost={editPost}
       />
     );

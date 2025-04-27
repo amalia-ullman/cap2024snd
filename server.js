@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.get("/api/posts", async (req, res) => {
   try {
-    const result = await Post.find();
+    const result = await Post.find().sort({ createdAt: -1 });
     console.log(result);
     res.send(result).status(200);
   } catch (err) {

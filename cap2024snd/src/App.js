@@ -46,13 +46,16 @@ export default function App() {
   }
 
   function deletePost(id) {
-    setPosts((prev) => {
-      return prev.filter((post) => {
-        console.log("Post id: ", post.id);
-        console.log("Passed Id: ", id);
-        return post.id !== id;
-      });
-    });
+    axios
+      .delete(`http://localhost:8080/api/posts/${id}`)
+      .then(() => {
+        setPosts((prev) => {
+          return prev.filter((post) => {
+            return post._id !== id;
+          });
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   return (

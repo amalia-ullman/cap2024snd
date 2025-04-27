@@ -12,7 +12,7 @@ export default function Sidebar({ addPost, currPosts }) {
         </div>
       </Link>
       <div class="plus">
-        <PostForm editMode={false} submit={addPost} length={currPosts[0]._id} />
+        <PostForm editMode={false} submit={addPost} />
       </div>
       <Link to="/">
         <div class="home">
