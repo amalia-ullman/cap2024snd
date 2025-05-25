@@ -5,9 +5,11 @@ import Post from "../components/Post";
 import PostForm from "../components/PostForm";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export default function Home({ currPosts, editPost, addPost, deletePost }) {
   const [currTag, setTag] = useState("All");
+  const navigate = useNavigate();
 
   let filteredPosts = currPosts.filter(function (post) {
     return post.tags.some(function (tagObj) {
@@ -43,7 +45,7 @@ export default function Home({ currPosts, editPost, addPost, deletePost }) {
         <option value="Neg">Neg</option>
         <option value="Aff">Aff</option>
       </select>
-      <button>Login</button>
+      <button onClick={() => navigate(`/login`)}>Login</button>
       <div class="container">
         {/* <div class="column"> */}
         {posts}
