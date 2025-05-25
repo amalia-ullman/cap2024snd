@@ -43,6 +43,7 @@ export default function Home({ currPosts, editPost, addPost, deletePost }) {
         <option value="Neg">Neg</option>
         <option value="Aff">Aff</option>
       </select>
+      <button>Login</button>
       <div class="container">
         {/* <div class="column"> */}
         {posts}

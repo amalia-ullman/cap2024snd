@@ -60,6 +60,9 @@ app.put("/api/posts/:id", async (req, res) => {
     const result = await Post.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
+    console.log("body", req.body);
+    console.log("Params id", req.params.id);
+    console.log("Result", result);
     res.send(result).status(200);
   } catch (err) {
     res.send(err).status(500);

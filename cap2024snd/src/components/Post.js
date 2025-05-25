@@ -28,7 +28,7 @@ export default function Post(props) {
 
   return (
     <div class="post">
-      <button onClick={() => navigate(`/posts/${props.id}`)}>View Post</button>
+      <button onClick={() => navigate(`/posts/${props._id}`)}>View Post</button>
       <div class="postheader">
         <div class="pfp">
           <img src={props.author.pfp} />

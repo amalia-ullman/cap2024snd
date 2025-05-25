@@ -4,14 +4,17 @@ import React, { Component } from "react";
 import { Route, Routes } from "react-router";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Sidebar from "./components/Sidebar";
 import PostPage from "./pages/PostPage";
 import postData from "./data/posts.json";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export default function App() {
   const [currPosts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("empty dependency use effect");
@@ -24,14 +27,22 @@ export default function App() {
   }, []);
 
   function editPost(id, newPost) {
-    setPosts((prev) => {
-      return prev.map(function (post) {
-        if (post.id == id) {
-          return newPost;
-        }
-        return post;
-      });
-    });
+    axios
+      .put(`http://localhost:8080/api/posts/${id}`, newPost)
+      .then((data) => {
+        setPosts((prev) => {
+          return prev.map(function (post) {
+            if (post._id == id) {
+              return {
+                _id: post._id,
+                ...newPost,
+              };
+            }
+            return post;
+          });
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   function addPost(newPost) {
@@ -46,6 +57,7 @@ export default function App() {
   }
 
   function deletePost(id) {
+    navigate(`/`);
     axios
       .delete(`http://localhost:8080/api/posts/${id}`)
       .then(() => {
@@ -85,6 +97,7 @@ export default function App() {
               />
             }
           />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </div>
