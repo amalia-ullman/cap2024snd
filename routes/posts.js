@@ -1,6 +1,6 @@
 import express from "express";
 const postRouter = express.Router();
-import { Post } from "../models/postsModel";
+import { Post } from "../models/postsModel.js";
 
 postRouter.get("/", async (req, res) => {
   try {

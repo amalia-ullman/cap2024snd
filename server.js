@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { Post } from "./models/postsModel.js";
 import cors from "cors";
 import { postRouter } from "./routes/posts.js";
+import { authRouter } from "./routes/auth.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/posts", postRouter);
+app.use("/api/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
