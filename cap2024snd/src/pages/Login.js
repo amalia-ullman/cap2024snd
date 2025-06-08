@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -8,21 +9,34 @@ export default function Login() {
   const [mode, setMode] = useState("login");
   const navigate = useNavigate();
 
-  const storedUser = localStorage.getItem("username");
-  const storedPassword = localStorage.getItem("password");
-  console.log(storedUser);
+  // const storedUser = localStorage.getItem("username");
+  // const storedPassword = localStorage.getItem("password");
+  // console.log(storedUser);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      localStorage.getItem("username").trim() == username.trim() &&
-      localStorage.getItem("password").trim() == password.trim()
-    ) {
-      navigate(`/`);
-    } else {
-      setMessage("incorrect username or password");
-    }
+    axios
+      .post("http://localhost:8080/api/auth/login", { username, password })
+      .then((res) => {
+        console.log(res);
+        if (res.status == 201) {
+          navigate(`/`);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.status == 400) {
+          setMessage(error.response.data.error);
+        }
+      });
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/auth")
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  });
 
   const handleUserChange = (e) => {
     setUsername(e.target.value);
