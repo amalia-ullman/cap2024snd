@@ -9,6 +9,9 @@ import { useNavigate } from "react-router";
 
 export default function Home({ currPosts, editPost, addPost, deletePost }) {
   const [currTag, setTag] = useState("All");
+  const [loggedInUser, setloggedInUser] = useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
   const navigate = useNavigate();
 
   let filteredPosts = currPosts.filter(function (post) {
@@ -45,7 +48,21 @@ export default function Home({ currPosts, editPost, addPost, deletePost }) {
         <option value="Neg">Neg</option>
         <option value="Aff">Aff</option>
       </select>
-      <button onClick={() => navigate(`/login`)}>Login</button>
+      {loggedInUser ? (
+        <>
+          <h1>hello, {loggedInUser.username}!</h1>
+          <button
+            onClick={() => {
+              localStorage.removeItem("user");
+              setloggedInUser(null);
+            }}
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <button onClick={() => navigate(`/login`)}>Login</button>
+      )}
       <div class="container">
         {/* <div class="column"> */}
         {posts}

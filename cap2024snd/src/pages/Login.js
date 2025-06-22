@@ -6,6 +6,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [confirmedPassword, setConfirmedPassword] = useState("");
   const [mode, setMode] = useState("login");
   const navigate = useNavigate();
 
@@ -15,20 +16,46 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8080/api/auth/login", { username, password })
-      .then((res) => {
-        console.log(res);
-        if (res.status == 201) {
-          navigate(`/`);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.status == 400) {
-          setMessage(error.response.data.error);
-        }
-      });
+    if (mode == "register") {
+      if (password == confirmedPassword) {
+        axios
+          .post("http://localhost:8080/api/auth/register", {
+            username,
+            password
+          })
+          .then((res) => {
+            console.log(res);
+            if (res.status == 201) {
+              localStorage.setItem("user", JSON.stringify(res.data));
+              navigate(`/`);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error.status == 400) {
+              setMessage(error.response.data.error);
+            }
+          });
+      } else {
+        setMessage("Passwords must match.");
+      }
+    } else {
+      axios
+        .post("http://localhost:8080/api/auth/login", { username, password })
+        .then((res) => {
+          console.log(res);
+          if (res.status == 201) {
+            localStorage.setItem("user", JSON.stringify(res.data));
+            navigate(`/`);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.status == 400) {
+            setMessage(error.response.data.error);
+          }
+        });
+    }
   };
 
   useEffect(() => {
@@ -44,6 +71,9 @@ export default function Login() {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+  const handleConfirmedPasswordChange = (e) => {
+    setConfirmedPassword(e.target.value);
   };
 
   const toggleMode = () => {
@@ -61,7 +91,7 @@ export default function Login() {
         {mode == "login" ? "Register" : "Login"}
       </button>
       <h1>{message ? message : null}</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="formStyle">
         <input
           type="text"
           name="username"
@@ -76,6 +106,15 @@ export default function Login() {
           value={password}
           onChange={handlePasswordChange}
         ></input>
+        {mode == "register" ? (
+          <input
+            type="text"
+            name="confirmedPassword"
+            placeholder="confirmedPassword"
+            value={confirmedPassword}
+            onChange={handleConfirmedPasswordChange}
+          ></input>
+        ) : null}
         <button>Submit</button>
       </form>
     </div>

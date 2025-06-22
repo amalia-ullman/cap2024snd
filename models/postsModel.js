@@ -4,28 +4,29 @@ const postSchema = new Schema(
   {
     title: {
       type: String,
-      required: true,
+      required: true
     },
     content: {
       type: String,
-      required: true,
+      required: true
     },
     author: {
       name: {
-        type: String,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
       },
       age: {
-        type: Number,
+        type: Number
       },
       pfp: {
-        type: String,
-      },
+        type: String
+      }
     },
     tags: {
       type: [String],
-      required: true,
-    },
+      required: true
+    }
   },
   { timestamps: true }
 );
