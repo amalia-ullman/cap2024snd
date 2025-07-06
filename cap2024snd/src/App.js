@@ -14,7 +14,12 @@ import { useNavigate } from "react-router";
 
 export default function App() {
   const [currPosts, setPosts] = useState([]);
+  const [jwt, setjwt] = useState(
+    JSON.parse(localStorage.getItem("user"))?.token
+  );
   const navigate = useNavigate();
+
+  console.log(jwt);
 
   useEffect(() => {
     console.log("empty dependency use effect");
@@ -27,15 +32,19 @@ export default function App() {
   }, []);
 
   function editPost(id, newPost) {
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${jwt}`
+    };
     axios
-      .put(`http://localhost:8080/api/posts/${id}`, newPost)
+      .put(`http://localhost:8080/api/posts/${id}`, newPost, headers)
       .then((data) => {
         setPosts((prev) => {
           return prev.map(function (post) {
             if (post._id == id) {
               return {
                 _id: post._id,
-                ...newPost,
+                ...newPost
               };
             }
             return post;
@@ -46,8 +55,12 @@ export default function App() {
   }
 
   function addPost(newPost) {
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${jwt}`
+    };
     axios
-      .post("http://localhost:8080/api/posts", newPost)
+      .post("http://localhost:8080/api/posts", newPost, headers)
       .then((data) => {
         setPosts((prev) => {
           return [newPost, ...prev];
